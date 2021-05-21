@@ -160,9 +160,6 @@ $(document).ready(function() {
                 var html = "";
                 result.forEach(ele => {
 
-                    var pdcd =  ele.system / ele.pdc;
-
-                    console.log(ele.pdc);
 
 
                     var diff = ele.system - ele.quantity;
@@ -173,7 +170,7 @@ $(document).ready(function() {
                         "<td>" + ele.company_id + "</td>" +
                         "<td>" + ele.pd_c + "</td>" +
                         "<td>" + ele.buy + "</td>" +
-                        "<td>" + pdcd + "</td>" +
+                        "<td>" + ele.sell + "</td>" +
                         "<td>" + ele.system + "</td>" +
                         "<td>" + ele.quantity + "</td>" +
                         "<td>" + diff + "</td>" +
