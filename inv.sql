@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2021 at 10:21 AM
+-- Generation Time: May 21, 2021 at 09:29 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -43,7 +43,9 @@ INSERT INTO `inv_main` (`inv_id`, `name`, `company_id`, `create_dt`) VALUES
 (44, 'สถาพร', '1', '2021-05-17 16:40:38'),
 (45, 'TurtleT', '3', '2021-05-18 08:41:56'),
 (46, 'TurtleT', '2', '2021-05-18 09:15:25'),
-(47, 'TurtleT', '4', '2021-05-18 15:05:10');
+(47, 'TurtleT', '4', '2021-05-18 15:05:10'),
+(48, 'TurtleT', '3', '2021-05-19 14:05:10'),
+(49, 'admin', '4', '2021-05-20 13:36:03');
 
 -- --------------------------------------------------------
 
@@ -69,7 +71,13 @@ INSERT INTO `inv_sub` (`sub_id`, `sub_name`, `company_id`, `create_dt`, `inv_id`
 (43, 'asd', '3', '2021-05-18 08:42:00', 45),
 (44, 'asd', '3', '2021-05-18 08:48:07', 45),
 (45, 'asd', '2', '2021-05-18 09:15:30', 46),
-(46, 'asd', '4', '2021-05-18 15:05:14', 47);
+(46, 'asd', '4', '2021-05-18 15:05:14', 47),
+(47, 'asd', '3', '2021-05-19 14:05:34', 45),
+(48, 'asd10', '3', '2021-05-19 14:05:43', 45),
+(49, 'sub2', '4', '2021-05-20 13:37:13', 49),
+(50, 'asd2', '4', '2021-05-20 14:18:05', 47),
+(51, 'asd', '4', '2021-05-20 14:20:48', 47),
+(52, 'asd', '2', '2021-05-20 16:53:08', 46);
 
 -- --------------------------------------------------------
 
@@ -104,11 +112,15 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`pd_id`, `pd_c`, `quantity`, `sub_id`, `company_id`) VALUES
-(183, 'RD5010/07', 1, 43, '3'),
-(184, 'RD5010/07', 1, 44, '3'),
-(199, '410001.03;LS401', 51, 45, '2'),
-(200, 'AP99', 12, 45, '2'),
-(203, 'RD5010/07', 1, 46, '4');
+(208, '410007.03;HAR217', 5, 49, '4'),
+(209, '410007.03;HAR217', 5, 50, '4'),
+(210, '410007.03;HAR217', 5, 51, '4'),
+(212, '11102028.03;VOU11', 5, 45, '2'),
+(213, '11102028.03;VOU11', 1, 52, '2'),
+(215, '410007.03;HAR217', 2, 46, '4'),
+(218, '410007.03;HAR219', 1, 46, '4'),
+(219, '410007.03;NTR1001', 1, 50, '4'),
+(220, '410007.03;HAR219', 1, 50, '4');
 
 --
 -- Indexes for dumped tables
@@ -146,25 +158,25 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `inv_main`
 --
 ALTER TABLE `inv_main`
-  MODIFY `inv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `inv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- AUTO_INCREMENT for table `inv_sub`
 --
 ALTER TABLE `inv_sub`
-  MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `sub_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `prod`
 --
 ALTER TABLE `prod`
-  MODIFY `pd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `pd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `pd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=204;
+  MODIFY `pd_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=221;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

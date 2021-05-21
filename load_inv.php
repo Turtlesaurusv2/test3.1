@@ -29,7 +29,7 @@ foreach($q as $key => $value)
 */
 $COUNT= $connect->prepare("
 
-SELECT  COUNT(*)as ttt FROM inventory where product_id = '$query'
+SELECT  COUNT(*)as ttt FROM inventory where company_id = $company_id
 
 ");
 
@@ -45,27 +45,14 @@ $startPage = ( $page - 1 ) * $rpp;
 $ttp = ceil($ttt/$rpp);
 
 
-//รับค่า Query จากหน้า test2.php 
-if(!empty($query))
-{
-// ค้นหาข้อมูลใน database ที่ตรงกับ input 
-	
-$results = $connect->prepare("SELECT company_id, product_id, sum(sell) as sell, sum(buy) as buy, sum(buy - sell) as system 
-FROM inventory WHERE product_id LIKE '%{$query}%'
-LIMIT {$startPage},{$rpp};
-");
-
-}
-else
-{
  //ถ้าไม่ได้ input  จะแสดงข้อมูล ใน datadase
- $results = $connect->prepare("SELECT company_id, product_id, sum(sell) as sell, sum(buy) as buy, sum(buy - sell) as system 
+ $results = $connect->prepare("SELECT company_id, product_id, sum(buy - sell) as system 
  FROM inventory 
  WHERE company_id = $company_id 
  group by product_id 
  LIMIT {$startPage},{$rpp}");
 
-}
+
 //แสดงข้อมูล column database
 $results->execute();
 

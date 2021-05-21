@@ -118,7 +118,7 @@ $company_id = $_GET['company_id'];
                             <input type="text" name="pd_c" id="pd_c" class="form-control" />
                             <br />
                             <label>จำนวนสินค้า</label>
-                            <input type="text" name="quantity" id="quantity" class="form-control" />
+                            <input type="number" name="quantity" id="quantity" class="form-control" />
                             <br />
                             <input type="hidden" name="sub_id" id="sub_id" value="<?php echo $id; ?>" />
                             <br />

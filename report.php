@@ -52,9 +52,10 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootpag/1.0.7/jquery.bootpag.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootpag/1.0.7/jquery.bootpag.min.js">
+    </script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    
+
     <title>report</title>
 </head>
 
@@ -76,6 +77,7 @@ echo $company_id;
             <thead>
                 <tr>
                     <th>รหัส</th>
+                    <th>รหัสรอบหลัก</th>
                     <th>company_id</th>
                     <th>รหัสสินค้า</th>
                     <th>buy</th>
@@ -90,27 +92,25 @@ echo $company_id;
     </div>
     <br>
 
-<br>
-<h1 class="w3-center">ข้อมูลทั้งหมด</h1>
-ิ<br>
-<table style="padding-top:10px">
-    <thead>
-        <tr>
-            <th>company_id</th>
-            <th>รหัสสินค้า</th>
-            <th>buy</th>
-            <th>sell</th>
-            <th>system</th>
+    <br>
+    <h1 class="w3-center">ข้อมูลทั้งหมด</h1>
+    ิ<br>
+    <table style="padding-top:10px">
+        <thead>
+            <tr>
+                <th>company_id</th>
+                <th>รหัสสินค้า</th>
+                <th>system</th>
 
-        </tr>
-        </thesd>
-    <tbody id="result2"></tbody>
-</table>
+            </tr>
+            </thesd>
+        <tbody id="result2"></tbody>
+    </table>
 
 
-<div id="page-selection"></div>
+    <div class="w3-center" id="page-selection"></div>
 
-</div>
+    </div>
 
 
 
@@ -120,7 +120,7 @@ echo $company_id;
 <script>
 //แสดงเฉพราะ (company inv_id sub_id) รหัสต้องตรงกัน  and product_id
 $(document).ready(function() {
-    
+
 
     load_data();
 
@@ -153,10 +153,12 @@ $(document).ready(function() {
                 var html = "";
                 result.forEach(ele => {
 
+
                     var diff = ele.system - ele.quantity;
 
                     html += "<tr>" +
                         "<td>" + ele.pd_id + "</td>" +
+                        "<td>" + ele.inv_id + "</td>" +
                         "<td>" + ele.company_id + "</td>" +
                         "<td>" + ele.pd_c + "</td>" +
                         "<td>" + ele.buy + "</td>" +
@@ -179,78 +181,76 @@ $(document).ready(function() {
     load_data2();
 
 
-    
+
 
 });
 
 function createPagination(current, page) {
-        // แก้ไข เรียกซ้ำซ้อน
-        $("#page-selection").unbind();
+    // แก้ไข เรียกซ้ำซ้อน
+    $("#page-selection").unbind();
 
-        $('#page-selection').bootpag({
-            total: page, //หน้า  page ทั้งหมด
-            page: current, //แสดงหน้าปัจจุบัน
-            maxVisible: 6, //จำนวน max หน้า page
-            leaps: false,
-            next: 'next',
-            prev: 'prev'
+    $('#page-selection').bootpag({
+        total: page, //หน้า  page ทั้งหมด
+        page: current, //แสดงหน้าปัจจุบัน
+        maxVisible: 6, //จำนวน max หน้า page
+        leaps: false,
+        next: 'next',
+        prev: 'prev'
 
-        }).on('page', function(event, num) {
+    }).on('page', function(event, num) {
 
-            var search_text = $("#search_text").val();
+        var search_text = $("#search_text").val();
 
-            console.log(num);
+        console.log(num);
 
-            load_data2(search_text, num);
+        load_data2(search_text, num);
 
-        });
+    });
 
 }
 
 function load_data2(query = "", page = 1) {
 
-        var company_id = $("#company_id").val();
-        //ประกาศตัวแปร object 
-        var data = {};
-        data["query"] = query;
-        data["page"] = page;
-        data["company_id"] = company_id;
-        //ประกาศตัวแปรjson ช
-        var query = JSON.stringify(data);
+    var company_id = $("#company_id").val();
+    //ประกาศตัวแปร object 
+    var data = {};
+    data["query"] = query;
+    data["page"] = page;
+    data["company_id"] = company_id;
+    //ประกาศตัวแปรjson ช
+    var query = JSON.stringify(data);
 
-        $.ajax({
-            url: "load_inv.php",
-            method: "POST",
-            async: false,
-            data: {
-                "query": query
-            },
-            dataType: "json",
-            success: function(res) {
+    $.ajax({
+        url: "load_inv.php",
+        method: "POST",
+        async: false,
+        data: {
+            "query": query
+        },
+        dataType: "json",
+        success: function(res) {
 
-                var result = res.result;
+            var result = res.result;
 
-                var html = "";
-                result.forEach(ele => {
+            var html = "";
+            result.forEach(ele => {
 
-                    html += "<tr>" +
-                        "<td>" + ele.company_id + "</td>" +
-                        "<td>" + ele.product_id + "</td>" +
-                        "<td>" + ele.buy + "</td>" +
-                        "<td>" + ele.sell + "</td>" +
-                        "<td>" + ele.system + "</td>" +
-                        "</tr>";
-                });
+                html += "<tr>" +
+                    "<td>" + ele.company_id + "</td>" +
+                    "<td>" + ele.product_id + "</td>" +
+                    "<td>" + ele.system + "</td>" +
+                    "</tr>";
+            });
 
-                $("#result2").html(html);
-                // load button
-                createPagination(res.currentPage, res.page);
+            $("#result2").html(html);
+            // load button
+            createPagination(res.currentPage, res.page);
 
-            }
+        }
 
-        });
+    });
 
-    }
+}
 </script>
 
 </html>
