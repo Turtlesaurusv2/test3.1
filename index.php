@@ -79,9 +79,7 @@ $company_id = $_GET["company_id"];
     <div class="container" style="width:700px;">
 
 
-        <br>
-        <a onclick="load_report();">รายงาน</a>
-        </br>
+
         <div class="w3-container">
 
             <br>
@@ -316,7 +314,11 @@ function load(id) {
                 <div>
                 <button type="button" name="age" id="ag2" data-toggle="modal" data-target="#add_data_Modal2">เพิ่มรอบนับ</button>
                 <br>
-                ไม่มีข้อมูล` +
+                ไม่มีข้อมูล` + 
+                `        <br>
+        <a onclick="load_report();">รายงาน</a>
+        </br>`
+                +
                         //แบบฟอร์มสร้างรอบนับ ดึงidจากรอบใหญ่แล้วบันทึกเข้าไปในรอบนับ
                         `<div id="add_data_Modal2" class="modal fade">
     <div class="modal-dialog">
@@ -354,6 +356,10 @@ function load(id) {
                 <div>
                 <button type="button" name="age" id="ag2" data-toggle="modal" data-target="#add_data_Modal2">เพิ่มรอบนับ</button>
                 <br>` +
+                
+                `        <br>
+        <a onclick="load_report(`+ id +`);">รายงาน</a>
+        </br>`+
                         //แบบฟอร์มสร้างรอบนับ ดึงidจากรอบใหญ่แล้วบันทึกเข้าไปในรอบนับ
                         `<div id="add_data_Modal2" class="modal fade">
     <div class="modal-dialog">
@@ -433,11 +439,11 @@ function load_sub(id) {
 }
 
 //redirectไปที่  report พร้อม id
-function load_report() {
+function load_report(id) {
 
 var company_id = $("#company_id").val();
 
-var x = "report.php?company_id=" + company_id;
+var x = "report.php?company_id=" + company_id + "&id=" +id;
 
 //var x = "sup_page.php?id='+id+'";
 

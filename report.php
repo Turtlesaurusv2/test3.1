@@ -65,10 +65,15 @@
 
 $company_id = $_GET['company_id'];
 
-echo $company_id;
+$inv_id = $_GET['id'];
+
+
+
+echo $inv_id;
 
 ?>
     <input type="hidden" name="company_id" id="company_id" value="<?php echo $company_id; ?>" />
+    <input type="hidden" name="inv_id" id="inv_id" value="<?php echo $inv_id; ?>" />
     <br>
 
 
@@ -127,6 +132,7 @@ $(document).ready(function() {
     function load_data(query = "") {
 
         var company_id = $('#company_id').val();
+        var inv_id = $('#inv_id').val();
 
         console.log(company_id);
 
@@ -134,6 +140,7 @@ $(document).ready(function() {
         var data = {};
         data["query"] = query;
         data["company_id"] = company_id;
+        data["inv_id"] = inv_id;
         //ประกาศตัวแปรjson ช
         var query = JSON.stringify(data);
 
@@ -153,6 +160,10 @@ $(document).ready(function() {
                 var html = "";
                 result.forEach(ele => {
 
+                    var pdcd =  ele.system / ele.pdc;
+
+                    console.log(ele.pdc);
+
 
                     var diff = ele.system - ele.quantity;
 
@@ -162,7 +173,7 @@ $(document).ready(function() {
                         "<td>" + ele.company_id + "</td>" +
                         "<td>" + ele.pd_c + "</td>" +
                         "<td>" + ele.buy + "</td>" +
-                        "<td>" + ele.sell + "</td>" +
+                        "<td>" + pdcd + "</td>" +
                         "<td>" + ele.system + "</td>" +
                         "<td>" + ele.quantity + "</td>" +
                         "<td>" + diff + "</td>" +
